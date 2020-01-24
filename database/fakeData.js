@@ -1,25 +1,29 @@
 const faker = require('faker');
 
-let data = [];
+const makeFakeData = () => {
+  let data = [];
 
-    for(let i = 1; i <= 100; i++) {
-      let obj = {
-        property_id: i
-      }
+  for (let i = 1; i <= 100; i++) {
+    let obj = {
+      property_id: i
+    };
 
-      let imageArray = [];
-      for (let j = 0; j < Math.floor(Math.random() * 10); j++) {
-        let imageObj = {
-          path: faker.image.imageUrl(),
-          description: faker.lorem.sentence()
-        };
-        imageArray.push(imageObj);
-      }
-      obj.property_images = imageArray.slice();
-      data.push(obj);
+    let imageArray = [];
+    for (let j = 0; j < Math.floor(Math.random() * 10); j++) {
+      let imageObj = {
+        path: faker.image.imageUrl(),
+        description: faker.lorem.sentence()
+      };
+      imageArray.push(imageObj);
     }
+    obj.property_images = imageArray.slice();
+    data.push(obj);
+  }
+
+  return (data);
+
+};
 
 
-    // console.log(data);
 
-    module.exports = data;
+module.exports = makeFakeData;

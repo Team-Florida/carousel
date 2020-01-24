@@ -16,27 +16,12 @@ const carouseSchema = new mongoose.Schema({
   }]
 })
 
-const CarouseModel = mongoose.model('carouselDoc', carouseSchema);
+CarouseModel = mongoose.model('carouselDoc', carouseSchema);
 
-// const sample = [
-//   {
-//   property_id: 252,
-//   property_images: [{
-//     path: 'http://somewhere',
-//     description: 'This room is nice'
-//   }]
-//   },
-//   {
-//     property_id: 253,
-//     property_images: [{
-//       path: 'http://dont know where',
-//       description: 'This room is big'
-//   }
-// ]
-// }];
+// module.exports = database;
+
+module.exports = CarouseModel;
 
 
-// Initial Dummy Data
-// const data = require('./fakeData.js');
-// CarouseModel.insertMany(data);
+
 
