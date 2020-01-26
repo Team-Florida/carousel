@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import appCss from '../../dist/styles.module.css';
 
 class App extends Component {
 
@@ -7,11 +8,11 @@ class App extends Component {
 
     this.state = {
       imgBoxesStatus: {
-        one: "inactive",
-        two: "inactive",
-        three: "inactive",
-        four: "inactive",
-        five: "inactive"
+        one: "Inactive",
+        two: "Inactive",
+        three: "Inactive",
+        four: "Inactive",
+        five: "Inactive"
       }
     };
 
@@ -28,9 +29,9 @@ class App extends Component {
     // Image with mouseOver is active , rest all are blur
     for (let currentKey in this.state.imgBoxesStatus) {
       if (currentKey === eventTargetName) {
-        tempObj[currentKey] = 'active';
+        tempObj[currentKey] = 'Active';
       } else {
-        tempObj[currentKey] = 'blur';
+        tempObj[currentKey] = 'Blur';
       }
     }
 
@@ -62,27 +63,27 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div className="container">
+        <div className={appCss.Container}>
 
-          <div className="leftBox">
-            <img src="./Images/1.jpg" name="one" className={this.state.imgBoxesStatus.one} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
+          <div className={appCss.LeftBox}>
+            <img src="./Images/1.jpg" name="one" className={appCss[this.state.imgBoxesStatus.one]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
           </div>
 
-          <div className="rightBox">
-            <div className="rightFirstBox">
-              <div className="smallImageBox leftTop">
-                <img src="./Images/2.jpg" name="two" className={this.state.imgBoxesStatus.two} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
+          <div className={appCss.RightBox}>
+            <div className={appCss.RightFirstBox}>
+              <div className={appCss.SmallImageBox + ' ' + appCss.LeftTop}>
+                <img src="./Images/2.jpg" name="two" className={appCss[this.state.imgBoxesStatus.two]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
               </div>
-              <div className="smallImageBox leftBottom">
-                <img src="./Images/3.jpg" name="three" className={this.state.imgBoxesStatus.three} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
+              <div className={appCss.SmallImageBox + ' ' + appCss.LeftBottom}>
+                <img src="./Images/3.jpg" name="three" className={appCss[this.state.imgBoxesStatus.three]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
               </div>
             </div>
-            <div className="rightSecondBox">
-              <div className="smallImageBox rightTop">
-                <img src="./Images/4.jpg" name="four" className={this.state.imgBoxesStatus.four} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
+            <div className={appCss.RightSecondBox}>
+              <div className={appCss.SmallImageBox + ' ' + appCss.RightTop}>
+                <img src="./Images/4.jpg" name="four" className={appCss[this.state.imgBoxesStatus.four]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
               </div>
-              <div className="smallImageBox rightBottom">
-                <img src="./Images/5.jpg" name="five" className={this.state.imgBoxesStatus.five} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
+              <div className={appCss.SmallImageBox + ' ' + appCss.RightBottom}>
+                <img src="./Images/5.jpg" name="five" className={appCss[this.state.imgBoxesStatus.five]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
               </div>
             </div>
           </div>
