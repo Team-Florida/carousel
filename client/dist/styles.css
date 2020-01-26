@@ -1,0 +1,187 @@
+/* =============== Initial reset  =============== */
+
+html, body, div, span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+
+/* =============== Box-sizing  =============== */
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
+/* =============== Clearfix  =============== */
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+/* =============== Image Divs =============== */
+
+.container {
+  width: 100%;
+  height: 295px;
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+.leftBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  border: 0;
+  border-top: 2px solid #484848;
+  border-bottom: 2px solid #484848;
+}
+
+.rightBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  border: 0;
+}
+
+.rightFirstBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid #484848;
+}
+
+.rightSecondBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0;
+  border-top: 2px solid #484848;
+  border-bottom: 2px solid #484848;
+}
+
+
+.smallImageBox {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  overflow: hidden;
+}
+
+.leftTop {
+  border-bottom: 2px solid #484848;
+}
+
+.rightTop {
+  border-bottom: 2px solid #484848;
+}
+
+/* =============== Image + Status of image  =============== */
+
+img {
+  width: 100%;
+  height: 100%;
+ 
+}
+
+.blur {
+  opacity: 0.7;
+}
+
+.inactive {
+  transition-duration: 0.450s;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.active {
+  transform: scale(1.05);
+  transition-duration: 0.450s;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* =============== Media Rule 744px-1127px  =============== */
+
+@media only screen and (max-width: 1127px) {
+  .leftBox{
+    width: 67%;
+  }
+
+  .rightBox{
+    width: 33%;
+  }
+
+  .rightFirstBox {
+    width: 100%;
+  }
+
+  .rightSecondBox {
+    display: none;
+  }
+}
+
+/* =============== Media Rule Below 743px  =============== */
+
+@media only screen and (max-width: 743px) {
+  .container {
+    height: 485px;
+  }
+
+  .leftBox {
+    width: 100%;
+  }
+  
+  .rightBox {
+    display: none;
+  }
+
+}
+
+/* |                    container                     | */
+/* ---------------------------------------------------- */
+/* |                        |                         | */
+/* |       leftBox          |        rightBox         | */
+/* |                        |                         | */
+/* ---------------------------------------------------- */
+
+/* |                    rightBox                      | */
+/* ---------------------------------------------------- */
+/* |                        |                         | */
+/* |     rightFirstBox      |     rightSecondBox      | */
+/* |                        |                         | */
+/* ---------------------------------------------------- */
+
+
+/* |      rightFirstBox       |   rightSecondBox          | */
+/* -------------------------------------------------------- */
+/* |                          |                           | */
+/* | leftTop smallImageBox    | rightTop smallImageBox    | */
+/* |                          |                           | */
+/* -------------------------------------------------------- */
+/* |                          |                           | */
+/* | leftBottom smallImageBox | rightBottom smallImageBox | */
+/* |                          |                           | */
+/* -------------------------------------------------------- */
+
+
