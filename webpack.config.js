@@ -40,6 +40,17 @@ module.exports = {
           'css-loader'
         ],
         exclude: /\.module\.css$/
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
       }
     ]
   }
