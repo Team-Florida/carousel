@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import appCss from '../../dist/styles.module.css';
+import appCss from '../../dist/carouselStyles.module.css';
 import ImageBox from './ImageBox.jsx';
 import Badge from './Badge.jsx';
 

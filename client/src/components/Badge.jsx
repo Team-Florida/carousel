@@ -1,5 +1,5 @@
 import React from 'react';
-import appCss from '../../dist/styles.module.css';
+import appCss from '../../dist/carouselStyles.module.css';
 
 const Badge = props => {
 
