@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import appCss from '../../dist/styles.module.css';
+import appCss from '../../dist/carouselStyles.module.css';
+import ImageBox from './ImageBox.jsx';
+import Badge from './Badge.jsx';
 
 class App extends Component {
 
@@ -65,29 +67,93 @@ class App extends Component {
       <div>
         <div className={appCss.Container}>
 
-          <div className={appCss.LeftBox}>
-            <img src="./Images/1.jpg" name="one" className={appCss[this.state.imgBoxesStatus.one]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
-          </div>
+          <ImageBox
+            passData={{
+              divClass: appCss.LeftBox,
+              imgSrc: "./Images/1.jpg",
+              imgName: "one",
+              imgClass: appCss[this.state.imgBoxesStatus.one],
+              mouseOverHandle: this.mouseOverHandler,
+              mouseOutHandle: this.mouseOutHandler
+            }}
+          ></ImageBox>
 
           <div className={appCss.RightBox}>
+
             <div className={appCss.RightFirstBox}>
-              <div className={appCss.SmallImageBox + ' ' + appCss.LeftTop}>
-                <img src="./Images/2.jpg" name="two" className={appCss[this.state.imgBoxesStatus.two]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
-              </div>
-              <div className={appCss.SmallImageBox + ' ' + appCss.LeftBottom}>
-                <img src="./Images/3.jpg" name="three" className={appCss[this.state.imgBoxesStatus.three]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
-              </div>
+              <ImageBox
+                passData={{
+                  divClass: appCss.SmallImageBox + ' ' + appCss.LeftTop,
+                  imgSrc: "./Images/2.jpg",
+                  imgName: "two",
+                  imgClass: appCss[this.state.imgBoxesStatus.two],
+                  mouseOverHandle: this.mouseOverHandler,
+                  mouseOutHandle: this.mouseOutHandler
+                }}
+              ></ImageBox>
+              <ImageBox
+                passData={{
+                  divClass: appCss.SmallImageBox + ' ' + appCss.LeftBottom,
+                  imgSrc: "./Images/3.jpg",
+                  imgName: "three",
+                  imgClass: appCss[this.state.imgBoxesStatus.three],
+                  mouseOverHandle: this.mouseOverHandler,
+                  mouseOutHandle: this.mouseOutHandler
+                }}
+              ></ImageBox>
             </div>
+
             <div className={appCss.RightSecondBox}>
-              <div className={appCss.SmallImageBox + ' ' + appCss.RightTop}>
-                <img src="./Images/4.jpg" name="four" className={appCss[this.state.imgBoxesStatus.four]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
-              </div>
-              <div className={appCss.SmallImageBox + ' ' + appCss.RightBottom}>
-                <img src="./Images/5.jpg" name="five" className={appCss[this.state.imgBoxesStatus.five]} onMouseOver={this.mouseOverHandler} onMouseOut={this.mouseOutHandler}></img>
-              </div>
+              <ImageBox
+                passData={{
+                  divClass: appCss.SmallImageBox + ' ' + appCss.RightTop,
+                  imgSrc: "./Images/4.jpg",
+                  imgName: "four",
+                  imgClass: appCss[this.state.imgBoxesStatus.four],
+                  mouseOverHandle: this.mouseOverHandler,
+                  mouseOutHandle: this.mouseOutHandler
+                }}
+              ></ImageBox>
+              <ImageBox
+                passData={{
+                  divClass: appCss.SmallImageBox + ' ' + appCss.RightBottom,
+                  imgSrc: './Images/5.jpg',
+                  imgName: 'five',
+                  imgClass: appCss[this.state.imgBoxesStatus.five],
+                  mouseOverHandle: this.mouseOverHandler,
+                  mouseOutHandle: this.mouseOutHandler
+                }}
+              ></ImageBox>
             </div>
+
           </div>
 
+          <Badge
+            passData={{
+              text: 'Share',
+              posRight: 120,
+              posTop: 20,
+              imgSrc: 'export.png'
+            }}
+          ></Badge>
+
+          <Badge
+            passData={{
+              text: "Save",
+              posRight: 20,
+              posTop: 20,
+              imgSrc: 'heart.png'
+            }}
+          ></Badge>
+
+          <Badge
+            passData={{
+              text: "View Photos",
+              posRight: 20,
+              posTop: 240
+            }}
+          ></Badge>
+          
         </div>
 
       </div>
