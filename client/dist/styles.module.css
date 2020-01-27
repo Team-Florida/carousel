@@ -1,0 +1,187 @@
+/* =============== Initial reset  =============== */
+
+html, body, div, span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+
+/* =============== Box-sizing  =============== */
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
+/* =============== Clearfix  =============== */
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+/* =============== Image Divs =============== */
+
+.Container {
+  width: 100%;
+  height: 295px;
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+.LeftBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  border: 0;
+  border-top: 2px solid #484848;
+  border-bottom: 2px solid #484848;
+}
+
+.RightBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  border: 0;
+}
+
+.RightFirstBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid #484848;
+}
+
+.RightSecondBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0;
+  border-top: 2px solid #484848;
+  border-bottom: 2px solid #484848;
+}
+
+
+.SmallImageBox {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  overflow: hidden;
+}
+
+.LeftTop {
+  border-bottom: 2px solid #484848;
+}
+
+.RightTop {
+  border-bottom: 2px solid #484848;
+}
+
+/* =============== Image + Status of image  =============== */
+
+img {
+  width: 100%;
+  height: 100%;
+ 
+}
+
+.Blur {
+  opacity: 0.7;
+}
+
+.Inactive {
+  transition-duration: 0.450s;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.Active {
+  transform: scale(1.05);
+  transition-duration: 0.450s;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* =============== Media Rule 744px-1127px  =============== */
+
+@media only screen and (max-width: 1127px) {
+  .LeftBox{
+    width: 67%;
+  }
+
+  .RightBox{
+    width: 33%;
+  }
+
+  .RightFirstBox {
+    width: 100%;
+  }
+
+  .RightSecondBox {
+    display: none;
+  }
+}
+
+/* =============== Media Rule Below 743px  =============== */
+
+@media only screen and (max-width: 743px) {
+  .Container {
+    height: 485px;
+  }
+
+  .LeftBox {
+    width: 100%;
+  }
+  
+  .RightBox {
+    display: none;
+  }
+
+}
+
+/* |                    container                     | */
+/* ---------------------------------------------------- */
+/* |                        |                         | */
+/* |       leftBox          |        rightBox         | */
+/* |                        |                         | */
+/* ---------------------------------------------------- */
+
+/* |                    rightBox                      | */
+/* ---------------------------------------------------- */
+/* |                        |                         | */
+/* |     rightFirstBox      |     rightSecondBox      | */
+/* |                        |                         | */
+/* ---------------------------------------------------- */
+
+
+/* |      rightFirstBox       |   rightSecondBox          | */
+/* -------------------------------------------------------- */
+/* |                          |                           | */
+/* | leftTop smallImageBox    | rightTop smallImageBox    | */
+/* |                          |                           | */
+/* -------------------------------------------------------- */
+/* |                          |                           | */
+/* | leftBottom smallImageBox | rightBottom smallImageBox | */
+/* |                          |                           | */
+/* -------------------------------------------------------- */
+
+
