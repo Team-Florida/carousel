@@ -1,8 +1,7 @@
 import React from 'react';
 
-// import modalCSS from '../../dist/modalStyles.module.css';
-
 import styled from 'styled-components';
+import ImageMovement from './ImageMovement.jsx';
 
 const ShareModalBox = styled.div`
   width: 100%;
@@ -34,7 +33,7 @@ const ModalShare = props => {
       <CrossButton onClick={props.closeHandle}>X</CrossButton>
       <Heading>Sign up to book</Heading>
       <hr />
-
+      <ImageMovement></ImageMovement>
     </ShareModalBox>
   );
 }

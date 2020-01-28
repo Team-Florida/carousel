@@ -1,0 +1,76 @@
+/* =============== Main Image =============== */
+
+.MainImageContainer {
+  float: left;
+  width: auto;
+  /* border: 10px solid #000000; */
+}
+
+.MainImageBox {
+  width: 400px;
+  height: 400px;
+  display: inline-block;
+}
+
+.BackButton {
+  float: left;
+}
+
+
+.FowardButton {
+  float: right;
+}
+
+/* =============== Slider Images  =============== */
+
+.AsideContainer {
+  float: right;
+  width: 264px;
+  width: 500px;
+  height: 400px;
+  text-align: center;
+  /* border: 10px solid #000000; */
+}
+
+/* =============== Slider Container  =============== */
+.SlideImageContainer {
+  width: 400px;
+  height: 64px;
+  margin-top: 40px;
+  overflow: hidden;
+  position: relative;
+  /* border: 1px solid green; */
+}
+
+/* == Image Slider (translate is applied to this element) == */
+.ImageSlider {
+  display: flex;
+  width: 96px;
+  height: 64px;
+  margin-left: 48px;
+}
+
+/* =============== Each image withinin Slider  =============== */
+.ThumbnailImage {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* ================== Image Slider Window  =================== */
+/* = (div with border which shows current highlighted image) = */
+
+.SliderWindow {
+  height: 64px;
+  width: 64px;
+  position: absolute;
+  top: 0px;
+  overflow: hidden;
+  border: 3px solid #484848;
+  border-radius: 4px;
+}
+
+.LessOpaque {
+  opacity: 0.5;
+}
+
+
