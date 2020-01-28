@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import appCss from '../../dist/carouselStyles.module.css';
 import ImageBox from './ImageBox.jsx';
 import Badge from './Badge.jsx';
+import Modal from './Modal.jsx';
 
 class App extends Component {
 
@@ -15,11 +16,14 @@ class App extends Component {
         three: "Inactive",
         four: "Inactive",
         five: "Inactive"
-      }
+      },
+      modalActive: "Inactive"
     };
 
     this.mouseOverHandler = this.mouseOverHandler.bind(this);
     this.mouseOutHandler = this.mouseOutHandler.bind(this);
+    this.modalActivate = this.modalActivate.bind(this);
+    this.modalQuitHandler = this.modalQuitHandler.bind(this);
   }
 
   mouseOverHandler(event) {
@@ -62,6 +66,18 @@ class App extends Component {
 
   }
 
+  modalActivate(modalName) {
+    this.setState({
+      modalActive: modalName
+    });
+  }
+
+  modalQuitHandler() {
+    this.setState({
+      modalActive: 'Inactive'
+    });
+  }
+
   render() {
     return (
       <div>
@@ -70,8 +86,8 @@ class App extends Component {
           <ImageBox
             passData={{
               divClass: appCss.LeftBox,
-              imgSrc: "./Images/1.jpg",
-              imgName: "one",
+              imgSrc: './Images/1.jpg',
+              imgName: 'one',
               imgClass: appCss[this.state.imgBoxesStatus.one],
               mouseOverHandle: this.mouseOverHandler,
               mouseOutHandle: this.mouseOutHandler
@@ -84,8 +100,8 @@ class App extends Component {
               <ImageBox
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.LeftTop,
-                  imgSrc: "./Images/2.jpg",
-                  imgName: "two",
+                  imgSrc: './Images/2.jpg',
+                  imgName: 'two',
                   imgClass: appCss[this.state.imgBoxesStatus.two],
                   mouseOverHandle: this.mouseOverHandler,
                   mouseOutHandle: this.mouseOutHandler
@@ -94,8 +110,8 @@ class App extends Component {
               <ImageBox
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.LeftBottom,
-                  imgSrc: "./Images/3.jpg",
-                  imgName: "three",
+                  imgSrc: './Images/3.jpg',
+                  imgName: 'three',
                   imgClass: appCss[this.state.imgBoxesStatus.three],
                   mouseOverHandle: this.mouseOverHandler,
                   mouseOutHandle: this.mouseOutHandler
@@ -107,8 +123,8 @@ class App extends Component {
               <ImageBox
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.RightTop,
-                  imgSrc: "./Images/4.jpg",
-                  imgName: "four",
+                  imgSrc: './Images/4.jpg',
+                  imgName: 'four',
                   imgClass: appCss[this.state.imgBoxesStatus.four],
                   mouseOverHandle: this.mouseOverHandler,
                   mouseOutHandle: this.mouseOutHandler
@@ -133,8 +149,10 @@ class App extends Component {
               text: 'Share',
               posRight: 120,
               posTop: 20,
-              imgSrc: 'export.png'
+              imgSrc: 'export.png',
+              modalName: 'ModalShare'
             }}
+            clickHandle={this.modalActivate}
           ></Badge>
 
           <Badge
@@ -142,19 +160,31 @@ class App extends Component {
               text: "Save",
               posRight: 20,
               posTop: 20,
-              imgSrc: 'heart.png'
+              imgSrc: 'heart.png',
+              modalName: 'ModalSave'
             }}
+            clickHandle={this.modalActivate}
           ></Badge>
 
           <Badge
             passData={{
               text: "View Photos",
               posRight: 20,
-              posTop: 240
+              posTop: 240,
+              modalName: 'ModalViewPhotos'
             }}
+            clickHandle={this.modalActivate}
           ></Badge>
-          
+
         </div>
+
+        {
+          this.state.modalActive !== "Inactive"
+            ?
+            <Modal modalName={this.state.modalActive} quitHandle={this.modalQuitHandler}></Modal>
+            :
+            null
+        }
 
       </div>
     );
