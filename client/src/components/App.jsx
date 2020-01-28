@@ -4,20 +4,24 @@ import ImageBox from './ImageBox.jsx';
 import Badge from './Badge.jsx';
 import Modal from './Modal.jsx';
 
+const imagesCollection = ['./Images/1.jpg', './Images/2.jpg', './Images/3.jpg', './Images/4.jpg', './Images/5.jpg', './Images/6.jpg', './Images/7.jpg', './Images/8.jpg', './Images/9.jpg', './Images/10.jpg', './Images/11.jpg']
+
+
 class App extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      imgBoxesStatus: {
+      data: imagesCollection,  // all images of the property 
+      imgBoxesStatus: {        // status of each of the five images Inactive/Active/Blur
         one: "Inactive",
         two: "Inactive",
         three: "Inactive",
         four: "Inactive",
         five: "Inactive"
       },
-      modalActive: "Inactive"
+      showingModal: "Inactive"  // Currently showing Modal, When Inactive no modal is shown
     };
 
     this.mouseOverHandler = this.mouseOverHandler.bind(this);
@@ -26,6 +30,7 @@ class App extends Component {
     this.modalQuitHandler = this.modalQuitHandler.bind(this);
   }
 
+  // When mouse is over the Image
   mouseOverHandler(event) {
 
     let eventTargetName = event.target.getAttribute('name');
@@ -49,6 +54,7 @@ class App extends Component {
 
   }
 
+  // When mouse is out of the Image
   mouseOutHandler() {
 
     let tempObj = {};
@@ -66,15 +72,17 @@ class App extends Component {
 
   }
 
+  // Activates the modal by assigning the name of modal to the state.showingModal
   modalActivate(modalName) {
     this.setState({
-      modalActive: modalName
+      showingModal: modalName
     });
   }
 
+  // Deactivates the modal by assigning 'Inactive' to the state.showingModal
   modalQuitHandler() {
     this.setState({
-      modalActive: 'Inactive'
+      showingModal: 'Inactive'
     });
   }
 
@@ -84,9 +92,10 @@ class App extends Component {
         <div className={appCss.Container}>
 
           <ImageBox
+            // First Image - Big - Left
             passData={{
               divClass: appCss.LeftBox,
-              imgSrc: './Images/1.jpg',
+              imgSrc: this.state.data[0],
               imgName: 'one',
               imgClass: appCss[this.state.imgBoxesStatus.one],
               mouseOverHandle: this.mouseOverHandler,
@@ -98,9 +107,10 @@ class App extends Component {
 
             <div className={appCss.RightFirstBox}>
               <ImageBox
+                // Second Image - Right Top Left
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.LeftTop,
-                  imgSrc: './Images/2.jpg',
+                  imgSrc: this.state.data[1],
                   imgName: 'two',
                   imgClass: appCss[this.state.imgBoxesStatus.two],
                   mouseOverHandle: this.mouseOverHandler,
@@ -108,9 +118,10 @@ class App extends Component {
                 }}
               ></ImageBox>
               <ImageBox
+                // Third Image - Right Bottom Left
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.LeftBottom,
-                  imgSrc: './Images/3.jpg',
+                  imgSrc: this.state.data[2],
                   imgName: 'three',
                   imgClass: appCss[this.state.imgBoxesStatus.three],
                   mouseOverHandle: this.mouseOverHandler,
@@ -121,9 +132,10 @@ class App extends Component {
 
             <div className={appCss.RightSecondBox}>
               <ImageBox
+                // Fourth Image - Right Top Right
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.RightTop,
-                  imgSrc: './Images/4.jpg',
+                  imgSrc: this.state.data[3],
                   imgName: 'four',
                   imgClass: appCss[this.state.imgBoxesStatus.four],
                   mouseOverHandle: this.mouseOverHandler,
@@ -131,9 +143,10 @@ class App extends Component {
                 }}
               ></ImageBox>
               <ImageBox
+                // Fifth Image - Right Bottom Right
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.RightBottom,
-                  imgSrc: './Images/5.jpg',
+                  imgSrc: this.state.data[4],
                   imgName: 'five',
                   imgClass: appCss[this.state.imgBoxesStatus.five],
                   mouseOverHandle: this.mouseOverHandler,
@@ -145,6 +158,7 @@ class App extends Component {
           </div>
 
           <Badge
+            // Share Badge 
             passData={{
               text: 'Share',
               posRight: 120,
@@ -156,6 +170,7 @@ class App extends Component {
           ></Badge>
 
           <Badge
+            // Save Badge
             passData={{
               text: "Save",
               posRight: 20,
@@ -167,6 +182,7 @@ class App extends Component {
           ></Badge>
 
           <Badge
+            // View Photos Badge 
             passData={{
               text: "View Photos",
               posRight: 20,
@@ -179,9 +195,9 @@ class App extends Component {
         </div>
 
         {
-          this.state.modalActive !== "Inactive"
+          this.state.showingModal !== "Inactive"
             ?
-            <Modal modalName={this.state.modalActive} quitHandle={this.modalQuitHandler}></Modal>
+            <Modal modalName={this.state.showingModal} quitHandle={this.modalQuitHandler}></Modal>
             :
             null
         }

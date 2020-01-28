@@ -17,21 +17,26 @@ class Modal extends React.Component {
 
 
   componentDidMount() {
+    // Add event Listener that listens to keypress
     document.addEventListener('keydown', this.keyDownHandler);
   }
 
+  // if 'Escape' key is pressed then close the modal
   keyDownHandler(event) {
     if (event.key === 'Escape') {
       this.modalCloseHandler();
     }
   }
 
+  // When modal closes 
   modalCloseHandler() {
+    // Remove event listener so that Escape button press does nothing after modal close
     document.removeEventListener('keydown', this.keyDownHandler);
+    // this is passed from App (Main)
     this.props.quitHandle();
   }
 
-
+  // When clicked outside of modal box then close the modal
   containerClickHandler(event) {
     if (event.target.getAttribute('name') === 'modalBox') {
       this.modalCloseHandler();

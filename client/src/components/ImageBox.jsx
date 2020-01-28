@@ -22,4 +22,7 @@ class ImageBox extends React.Component {
 
 }
 
+// ImageBox is a div with image tag as child
+// ImageBox className; Image src, name, className and mouse events are passed in as props
+
 export default ImageBox;

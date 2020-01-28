@@ -21,4 +21,8 @@ const Badge = props => {
 
 }
 
+// On Click pass back the modal name so that correct modal can be activated
+// Absolute position top, right is passed as props
+// Some Badge's will not have background Image so adjust backgroundImage and paddingLeft accordingly 
+
 export default Badge;
