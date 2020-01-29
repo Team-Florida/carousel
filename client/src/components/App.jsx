@@ -88,11 +88,12 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div data-test="main-app"> 
         <div className={appCss.Container}>
 
           <ImageBox
             // First Image - Big - Left
+            data-test="leftBig-image-box"
             passData={{
               divClass: appCss.LeftBox,
               imgSrc: this.state.data[0],
@@ -108,6 +109,7 @@ class App extends Component {
             <div className={appCss.RightFirstBox}>
               <ImageBox
                 // Second Image - Right Top Left
+                data-test="leftTop-image-box"
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.LeftTop,
                   imgSrc: this.state.data[1],
@@ -118,7 +120,8 @@ class App extends Component {
                 }}
               ></ImageBox>
               <ImageBox
-                // Third Image - Right Bottom Left
+                // Third Image - Left Bottom Left
+                data-test="leftBottom-image-box"
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.LeftBottom,
                   imgSrc: this.state.data[2],
@@ -133,6 +136,7 @@ class App extends Component {
             <div className={appCss.RightSecondBox}>
               <ImageBox
                 // Fourth Image - Right Top Right
+                data-test="rightTop-image-box"
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.RightTop,
                   imgSrc: this.state.data[3],
@@ -144,6 +148,7 @@ class App extends Component {
               ></ImageBox>
               <ImageBox
                 // Fifth Image - Right Bottom Right
+                data-test="rightBottom-image-box"
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.RightBottom,
                   imgSrc: this.state.data[4],
