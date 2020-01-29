@@ -9,7 +9,11 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
 import App from '../components/App.jsx';
 
 const setup = (props={}, state=null) => {
-  return shallow(<App {...props} />)
+  const wrapper =  shallow(<App {...props} />);
+  if(state) {
+    wrapper.setState(state)
+  }
+  return wrapper;
 }
 
 const findByTestAttr = (wrapper, val) => {
@@ -24,15 +28,15 @@ test('renders without error', () => {
 
 test('renders all Image Boxes', () => {
   const wrapper = setup();
-  var appComponent = wrapper.find("[data-test='leftBig-image-box']");
+  var appComponent = findByTestAttr(wrapper,'leftBig-image-box');
   expect(appComponent.length).toBe(1);
-  var appComponent = wrapper.find("[data-test='leftTop-image-box']");
+  var appComponent = findByTestAttr(wrapper,'leftTop-image-box');
   expect(appComponent.length).toBe(1);
-  var appComponent = wrapper.find("[data-test='leftBottom-image-box']");
+  var appComponent = findByTestAttr(wrapper,'leftBottom-image-box');
   expect(appComponent.length).toBe(1);
-  var appComponent = wrapper.find("[data-test='rightTop-image-box']");
+  var appComponent = findByTestAttr(wrapper,'rightTop-image-box');
   expect(appComponent.length).toBe(1);
-  var appComponent = wrapper.find("[data-test='rightBottom-image-box']");
+  var appComponent = findByTestAttr(wrapper,'rightBottom-image-box');
   expect(appComponent.length).toBe(1);
 });
 
@@ -52,4 +56,16 @@ test('Inital state of all imgBoxesStatus is "Inactive" ', () => {
 });
 
 
+test('Mouse over on first Image Div', () => {
+  const wrapper = setup();
+  var appComponent = findByTestAttr(wrapper,'addDiv');
 
+  var stateVal = wrapper.state('count');
+  console.log("First ", stateVal)
+  
+  appComponent.simulate('mouseover');
+
+  stateVal = wrapper.state('count');
+  console.log("Second " , stateVal)
+
+});

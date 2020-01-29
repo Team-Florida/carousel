@@ -13,6 +13,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      count: 9,
       data: imagesCollection,  // all images of the property 
       imgBoxesStatus: {        // status of each of the five images Inactive/Active/Blur
         one: "Inactive",
@@ -22,6 +23,7 @@ class App extends Component {
         five: "Inactive"
       },
       showingModal: "Inactive"  // Currently showing Modal, When Inactive no modal is shown
+
     };
 
     this.mouseOverHandler = this.mouseOverHandler.bind(this);
@@ -87,8 +89,10 @@ class App extends Component {
   }
 
   render() {
+
     return (
-      <div data-test="main-app"> 
+      <div data-test="main-app">
+
         <div className={appCss.Container}>
 
           <ImageBox
@@ -164,6 +168,7 @@ class App extends Component {
 
           <Badge
             // Share Badge 
+            data-test="modal-share"
             passData={{
               text: 'Share',
               posRight: 120,
@@ -188,6 +193,7 @@ class App extends Component {
 
           <Badge
             // View Photos Badge 
+
             passData={{
               text: "View Photos",
               posRight: 20,

@@ -6,9 +6,11 @@ class ImageBox extends React.Component {
     super(props)
   }
 
+ 
+
   render() {
     return (
-      <div className={this.props.passData.divClass}>
+      <div className={this.props.passData.divClass} data-test="main-image-box">
         <img
           src={this.props.passData.imgSrc}
           name={this.props.passData.imgName}
