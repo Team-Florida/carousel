@@ -79,7 +79,7 @@ test('modalActivate method changes the state', () => {
   
   const wrapper = setup();
   const instance = wrapper.instance();
-  // console.log("Wrapper: ");
+  console.log("Wrapper: ");
   
   instance.modalActivate("ModalShare");
   var stateVal = wrapper.state('showingModal');
