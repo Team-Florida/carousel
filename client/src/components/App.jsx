@@ -3,9 +3,9 @@ import appCss from '../../dist/carouselStyles.module.css';
 import ImageBox from './ImageBox.jsx';
 import Badge from './Badge.jsx';
 import Modal from './Modal.jsx';
+import Axios from 'axios';
 
-const imagesCollection = ['./Images/1.jpg', './Images/2.jpg', './Images/3.jpg', './Images/4.jpg', './Images/5.jpg', './Images/6.jpg', './Images/7.jpg', './Images/8.jpg', './Images/9.jpg', './Images/10.jpg', './Images/11.jpg']
-
+// const imagesCollection = ['./Images/1.jpg', './Images/2.jpg', './Images/3.jpg', './Images/4.jpg', './Images/5.jpg', './Images/6.jpg', './Images/7.jpg', './Images/8.jpg', './Images/9.jpg', './Images/10.jpg', './Images/11.jpg'];
 
 class App extends Component {
 
@@ -13,8 +13,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      count: 9,
-      data: imagesCollection,  // all images of the property 
+      data: {},  // all images of the property 
       imgBoxesStatus: {        // status of each of the five images Inactive/Active/Blur
         one: "Inactive",
         two: "Inactive",
@@ -22,19 +21,38 @@ class App extends Component {
         four: "Inactive",
         five: "Inactive"
       },
-      // showingModal: "Inactive"  // Currently showing Modal, When Inactive no modal is shown
-      showingModal: "ModalViewPhotos" 
+      showingModal: "Inactive",  // Currently showing Modal, When Inactive no modal is shown
+      imageClicked: 1 //Default
     };
 
     this.mouseOverHandler = this.mouseOverHandler.bind(this);
     this.mouseOutHandler = this.mouseOutHandler.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
     this.modalActivate = this.modalActivate.bind(this);
     this.modalQuitHandler = this.modalQuitHandler.bind(this);
   }
 
+
+  componentDidMount() {
+    var comp = this;
+    let property_id = Math.floor(Math.random()* 100);
+
+    Axios.get(`/property:${property_id}`)
+      .then(response => {
+        comp.setState({
+          data: response.data[0]
+        }
+        // , () => console.log(this.state.data)
+        )
+      })
+      .catch((error) => console.log("Error fetching initial Data on componentDidMount"));
+  }
+
+
+
   // When mouse is over the Image
   mouseOverHandler(event) {
-
+    
     let eventTargetName = event.target.getAttribute('name');
 
     let tempObj = {};
@@ -63,7 +81,7 @@ class App extends Component {
 
     // On mouseOut all images are inactive
     for (let currentKey in this.state.imgBoxesStatus) {
-      tempObj[currentKey] = 'inactive';
+      tempObj[currentKey] = 'Inactive';
     }
 
     this.setState({
@@ -71,6 +89,15 @@ class App extends Component {
     }
       // , () => console.log(this.state.imgBoxesStatus)
     );
+
+  }
+
+  clickHandler() {
+    
+    this.setState({
+      imageClicked: parseInt(event.target.id),
+      showingModal: 'ModalViewPhotos'
+    })
 
   }
 
@@ -82,14 +109,20 @@ class App extends Component {
   }
 
   // Deactivates the modal by assigning 'Inactive' to the state.showingModal
-  modalQuitHandler() {
+  modalQuitHandler(whichModalClosed) {
+    let resetImageClicked = this.setState.imageClicked;
+
+    if (whichModalClosed === 'ModalViewPhotos') {
+      resetImageClicked = 1;
+    }
     this.setState({
-      showingModal: 'Inactive'
+      showingModal: 'Inactive',
+      imageClicked: resetImageClicked
     });
   }
 
   render() {
-
+    
     return (
       <div data-test="main-app">
 
@@ -100,11 +133,13 @@ class App extends Component {
             data-test="leftBig-image-box"
             passData={{
               divClass: appCss.LeftBox,
-              imgSrc: this.state.data[0],
+              imgSrc: (this.state.data.property_id) ? this.state.data.property_images[0].path : '',
               imgName: 'one',
+              imgId: 1,
               imgClass: appCss[this.state.imgBoxesStatus.one],
               mouseOverHandle: this.mouseOverHandler,
-              mouseOutHandle: this.mouseOutHandler
+              mouseOutHandle: this.mouseOutHandler,
+              clickHandle: this.clickHandler
             }}
           ></ImageBox>
 
@@ -116,11 +151,13 @@ class App extends Component {
                 data-test="leftTop-image-box"
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.LeftTop,
-                  imgSrc: this.state.data[1],
+                  imgSrc: (this.state.data.property_id) ? this.state.data.property_images[1].path : '',
                   imgName: 'two',
+                  imgId: 2,
                   imgClass: appCss[this.state.imgBoxesStatus.two],
                   mouseOverHandle: this.mouseOverHandler,
-                  mouseOutHandle: this.mouseOutHandler
+                  mouseOutHandle: this.mouseOutHandler,
+                  clickHandle: this.clickHandler
                 }}
               ></ImageBox>
               <ImageBox
@@ -128,11 +165,13 @@ class App extends Component {
                 data-test="leftBottom-image-box"
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.LeftBottom,
-                  imgSrc: this.state.data[2],
+                  imgSrc: (this.state.data.property_id) ? this.state.data.property_images[2].path : '',
                   imgName: 'three',
+                  imgId: 3,
                   imgClass: appCss[this.state.imgBoxesStatus.three],
                   mouseOverHandle: this.mouseOverHandler,
-                  mouseOutHandle: this.mouseOutHandler
+                  mouseOutHandle: this.mouseOutHandler,
+                  clickHandle: this.clickHandler
                 }}
               ></ImageBox>
             </div>
@@ -143,11 +182,13 @@ class App extends Component {
                 data-test="rightTop-image-box"
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.RightTop,
-                  imgSrc: this.state.data[3],
+                  imgSrc: (this.state.data.property_id) ? this.state.data.property_images[3].path : '',
                   imgName: 'four',
+                  imgId: 4,
                   imgClass: appCss[this.state.imgBoxesStatus.four],
                   mouseOverHandle: this.mouseOverHandler,
-                  mouseOutHandle: this.mouseOutHandler
+                  mouseOutHandle: this.mouseOutHandler,
+                  clickHandle: this.clickHandler
                 }}
               ></ImageBox>
               <ImageBox
@@ -155,11 +196,13 @@ class App extends Component {
                 data-test="rightBottom-image-box"
                 passData={{
                   divClass: appCss.SmallImageBox + ' ' + appCss.RightBottom,
-                  imgSrc: this.state.data[4],
+                  imgSrc: (this.state.data.property_id) ? this.state.data.property_images[4].path : '',
                   imgName: 'five',
+                  imgId: 5,
                   imgClass: appCss[this.state.imgBoxesStatus.five],
                   mouseOverHandle: this.mouseOverHandler,
-                  mouseOutHandle: this.mouseOutHandler
+                  mouseOutHandle: this.mouseOutHandler,
+                  clickHandle: this.clickHandler
                 }}
               ></ImageBox>
             </div>
@@ -208,7 +251,7 @@ class App extends Component {
         {
           this.state.showingModal !== "Inactive"
             ?
-            <Modal modalName={this.state.showingModal} quitHandle={this.modalQuitHandler}></Modal>
+            <Modal modalName={this.state.showingModal} quitHandle={this.modalQuitHandler} modalData={this.state.data.property_images} imageClicked={this.state.imageClicked}></Modal>
             :
             null
         }

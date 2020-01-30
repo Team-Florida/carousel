@@ -13,14 +13,16 @@ module.exports.fetchAllProperties = (callback) => {
 
 }
 
-module.exports.fetchProperty = (propertyNo, callback) => {  
+module.exports.fetchProperty = (propertyNo) => {  
 
-  CarouseModel.find({property_id : propertyNo}, (error, data) => {
-    if(error) {
-      callback(error, null);
-    } else {
-      callback(null, data);
-    }
+  return new Promise( (resolve, reject) => {
+    CarouseModel.find({property_id : propertyNo}, (err, data) => {
+      if(err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    })
   });
 
 }

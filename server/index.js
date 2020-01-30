@@ -28,14 +28,9 @@ app.get('/properties',  (req, res) => {
 app.get('/property:id',  (req, res) => {
   let propertyId = req.params.id;
   propertyId = propertyId.slice(1); // reoove starting :
-  model.fetchProperty(propertyId, (err, response) => {
-    if(err) {
-      console.log(err);
-    } else {
-      res.status(200).send(response);
-    }
-    
-  })
+  
+  model.fetchProperty(propertyId)
+    .then(response => res.send(response));
 })
 
 

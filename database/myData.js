@@ -60,7 +60,7 @@ for(let i = 1; i <= 100; i++) {
   
   let propImageArray = [];
 
-  for(let j = 0; j < 15; j++) {
+  for(let j = 0; j < Math.floor((Math.random()* 20) + 9); j++) {
     let tempObj = {
       path: imagesArray[Math.floor(Math.random() * (imagesArray.length))],
       description: descriptionArray[Math.floor(Math.random() * (descriptionArray.length))]

@@ -10,32 +10,26 @@ const ShareModalBox = styled.div`
   background-color: #ffffff;
   padding: 10px 0px;
   border-radius: 10px;
-`;
-
-const Heading = styled.div`
-  font-weight: bold;
-  display: inline-block;
-  margin-top: 5px;
+  position: relative;
 `;
 
 const CrossButton = styled.div`
-  float: left;
-  margin-left: 20px;
-  text-align: left;
-  font-size: 1.4em;
-  font-weight: bold;
+  float: right;
+  margin: 36px;
+  height: 36px;
+  width: 36px;
+  background-image: url("./Images/badge-images/close.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
-const ModalShare = props => {
+const ModalViewPhotos = props => {
   return (
     <ShareModalBox>
-
-      <CrossButton onClick={props.closeHandle}>X</CrossButton>
-      <Heading>Sign up to book</Heading>
-      <hr />
-      <ImageMovement></ImageMovement>
+      <CrossButton onClick={props.closeHandle}></CrossButton>
+      <ImageMovement album={props.modalData} imageClicked={props.imageClicked}></ImageMovement>
     </ShareModalBox>
   );
 }
 
-export default ModalShare;
+export default ModalViewPhotos;
