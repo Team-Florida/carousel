@@ -22,8 +22,8 @@ class App extends Component {
         four: "Inactive",
         five: "Inactive"
       },
-      showingModal: "Inactive"  // Currently showing Modal, When Inactive no modal is shown
-
+      // showingModal: "Inactive"  // Currently showing Modal, When Inactive no modal is shown
+      showingModal: "ModalViewPhotos" 
     };
 
     this.mouseOverHandler = this.mouseOverHandler.bind(this);
