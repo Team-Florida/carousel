@@ -18,6 +18,7 @@ class ImageMovement extends React.Component {
 
     this.imageBackHandler = this.imageBackHandler.bind(this);
     this.imageFowardHandler = this.imageFowardHandler.bind(this);
+    this.thumbnailClickHandler = this.thumbnailClickHandler.bind(this);
     this.sliderHelper = this.sliderHelper.bind(this);
   }
 
@@ -73,6 +74,36 @@ class ImageMovement extends React.Component {
 
   }
 
+  thumbnailClickHandler(event)  {
+    let newPosition = parseInt(event.target.id);
+    let currentPosition = this.state.currentPosition;
+    let totalMovement = newPosition - currentPosition;
+
+    
+     // TranslatePosition - Movement of slider
+     let newTranslatePosition = this.state.translatePosition - totalMovement;
+     
+    // Foward Movement
+    if(totalMovement > 0) {
+      // For first and last position don't move slider, move the slider window
+      if (currentPosition === 0 || newPosition === this.state.data.length - 1) {
+        newTranslatePosition = newTranslatePosition + 1;
+      } 
+    }
+ 
+    // Back movement
+    if(totalMovement < 0) {
+      // For first and last position don't move slider, move the slider window
+      if (newPosition === 0 || currentPosition === this.state.data.length - 1) { 
+       newTranslatePosition = newTranslatePosition -1;
+     } 
+    }
+    
+    // Helper function to adjust slider window and setState of all values
+    this.sliderHelper(newPosition, newTranslatePosition);
+  }
+
+  
   // Helper function used in imageFowardHandler and imageBackHandler event Handler
   sliderHelper(newPosition, newTranslatePosition) {
 
@@ -121,6 +152,7 @@ class ImageMovement extends React.Component {
         <div key={index} className={movementCss.ThumbnailImage}>
           <img
             src={picPath}
+            id={index}
             className={currentClass}>
           </img>
         </div>
@@ -161,7 +193,7 @@ class ImageMovement extends React.Component {
             <div
               className={movementCss.ImageSlider}
               style={{ transform: `translate(${this.state.translatePosition * 60 + 30}px)` }}
-              onClick={(event) => console.log(event.target)}
+              onClick={this.thumbnailClickHandler}
             >
               {this.sliderImageElementMaker()}
             </div>
