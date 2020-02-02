@@ -7,6 +7,7 @@ import EnzymeAdapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 import App from '../components/App.jsx';
+import appCss from '../../dist/carouselStyles.module.css';
 
 const setup = (props = {}, state = null) => {
   const wrapper = shallow(<App {...props} />);
@@ -79,7 +80,7 @@ test('modalActivate method changes the state', () => {
   
   const wrapper = setup();
   const instance = wrapper.instance();
-  console.log("Wrapper: ");
+  // console.log("Wrapper: ", wrapper.debug());
   
   instance.modalActivate("ModalShare");
   var stateVal = wrapper.state('showingModal');
@@ -121,25 +122,24 @@ test('method mouseOverHandler changes the state', () => {
 
   // create a event
   const element = document.createElement('img');
-  element.name= 'four';
-  element.id=4;
+  element.name= 'three';
+  element.id=3;
   const event = {
     target: element
   };
 
   // Setup
-  const wrapper = setup(null, 
-     { imgBoxesStatus: {        
-      four: "Active"
-      }
-     }
-    );
+  const wrapper = setup();
   const instance = wrapper.instance();
 
-  // Test mouseOutHandler on element with name="four"
-  instance.mouseOutHandler(event);
-  var stateVal = wrapper.state('imgBoxesStatus');
-  expect(stateVal.four).toBe('Inactive');
+  // Test mouseOutHandler on element with name="three"
+  // instance.mouseOverHandler(event);
+  var appComponent = findByTestAttr(wrapper, 'leftBottom-image-box');
+  expect(appComponent.prop('passData').imgClass).toBe('Inactive');
+
+  instance.mouseOverHandler(event);
+  var appComponent = findByTestAttr(wrapper, 'leftBottom-image-box');
+  expect(appComponent.prop('passData').imgClass).toBe('Active');
 
 });
 

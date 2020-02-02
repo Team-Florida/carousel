@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
+    "test:coverage": "jest --coverage --colors",
     "react-dev": "webpack -w",
     "start": "nodemon ./server/index.js",
     "dummy-data": "node database/dummyDataInsert.js"

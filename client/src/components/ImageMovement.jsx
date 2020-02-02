@@ -1,5 +1,6 @@
 import React from 'react';
 import movementCss from '../../dist/movementStyles.module.css';
+import CloseButton from './CloseButton.jsx';
 
 
 class ImageMovement extends React.Component {
@@ -8,23 +9,44 @@ class ImageMovement extends React.Component {
     super(props);
 
     this.state = {
-      // data: imagesCollection,
       data: this.props.album,
       currentPosition: 0,
       translatePosition: 0,
-      sliderWindowLeft: 36
+      fixedPositions: 1
     }
 
     this.imageBackHandler = this.imageBackHandler.bind(this);
     this.imageFowardHandler = this.imageFowardHandler.bind(this);
     this.thumbnailClickHandler = this.thumbnailClickHandler.bind(this);
     this.sliderHelper = this.sliderHelper.bind(this);
+    this.handleResize = this.handleResize.bind(this);
   }
 
+  
+
   componentDidMount() {
-    // Passed from App => Modal => ModalViewPhotos
-    // minus one as array is zero indexed but pic position starts from one 
-    this.sliderHelper(this.props.imageClicked - 1);
+    if (window.innerWidth <= 1127) {
+      this.setState({
+        fixedPositions: 3
+      })
+    }
+    window.addEventListener("resize", this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  }
+
+  handleResize() {
+    let newFixedPosition = 1;
+    if (window.innerWidth <= 1127) {
+      newFixedPosition = 3;
+    }
+    this.setState({
+      fixedPositions: newFixedPosition
+    }
+    ,() => this.sliderHelper(this.state.currentPosition)
+    )
   }
 
 
@@ -70,27 +92,22 @@ class ImageMovement extends React.Component {
   // Helper function used in imageFowardHandler and imageBackHandler event Handler
   sliderHelper(newPosition) {
 
-    let newTranslatePosition = newPosition - 1;
-    let newSliderWindowLeft = 96;
+    let newTranslatePosition = newPosition - this.state.fixedPositions;
 
-    if (newPosition === 0) {
-      newTranslatePosition = newTranslatePosition + 1;
-      newSliderWindowLeft = 36;
+    if (newPosition < this.state.fixedPositions) {
+      newTranslatePosition = 0;
     }
-
-    if (newPosition === this.state.data.length - 1) {
-      newTranslatePosition = newTranslatePosition - 1;
-      newSliderWindowLeft = 156;
+   
+    if (newPosition > this.state.data.length - this.state.fixedPositions) {
+      newTranslatePosition = this.state.data.length - (this.state.fixedPositions * 2);
     }
 
     // New Values
     this.setState({
       currentPosition: newPosition,
-      translatePosition: newTranslatePosition,
-      sliderWindowLeft: newSliderWindowLeft
-    }
-      // , () => console.log(this.state.currentPosition, this.state.translatePosition )
-    )
+      translatePosition: newTranslatePosition
+    });
+      
   }
 
   // Map over data array to make Images Element for slider 
@@ -100,8 +117,9 @@ class ImageMovement extends React.Component {
       let currentClass = ' ';
       if (index !== this.state.currentPosition) {
         currentClass = movementCss.LessOpaque;
+      } else {
+        currentClass  = movementCss.BorderFrame;
       }
-
 
       return (
         <div key={index} className={movementCss.ThumbnailImage}>
@@ -117,7 +135,7 @@ class ImageMovement extends React.Component {
     return smallImagesElement;
   }
 
-
+ 
   render() {
 
     return (
@@ -126,7 +144,10 @@ class ImageMovement extends React.Component {
         <div className={movementCss.MainImageContainer}>
           <div className={movementCss.BackButton}>
             <button onClick={this.imageBackHandler} className={movementCss.btn}>
-              <img src="/Images/badge-images/less-than.png"></img>
+              <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
+                <path d="m13.7 16.29a1 1 0 1 1 -1.42 1.41l-8-8a1 1 0 0 1 0-1.41l8-8a1 1 0 1 1 1.42 1.41l-7.29 7.29z">
+                  </path>
+              </svg>
             </button>
           </div>
           <div className={movementCss.MainImageDiv}>
@@ -136,7 +157,10 @@ class ImageMovement extends React.Component {
           </div>
           <div className={movementCss.FowardButton}>
             <button onClick={this.imageFowardHandler}>
-              <img src="/Images/badge-images/greater-than.png"></img>
+            <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
+              <path d="m4.29 1.71a1 1 0 1 1 1.42-1.41l8 8a1 1 0 0 1 0 1.41l-8 8a1 1 0 1 1 -1.42-1.41l7.29-7.29z">
+              </path>
+            </svg>
             </button>
           </div>
         </div>
@@ -151,11 +175,6 @@ class ImageMovement extends React.Component {
               onClick={this.thumbnailClickHandler}
             >
               {this.sliderImageElementMaker()}
-            </div>
-
-            <div
-              className={movementCss.SliderWindow}
-              style={{ left: `${this.state.sliderWindowLeft}px` }}>
             </div>
 
           </div>

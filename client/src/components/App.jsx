@@ -35,14 +35,14 @@ class App extends Component {
 
   componentDidMount() {
     var comp = this;
-    let property_id = Math.floor(Math.random()* 100);
+    let property_id = Math.floor(Math.random() * 100);
 
     Axios.get(`/property:${property_id}`)
       .then(response => {
         comp.setState({
           data: response.data[0]
         }
-        // , () => console.log(this.state.data)
+          // , () => console.log(this.state.data)
         )
       })
       .catch((error) => console.log("Error fetching initial Data on componentDidMount"));
@@ -52,7 +52,7 @@ class App extends Component {
 
   // When mouse is over the Image
   mouseOverHandler(event) {
-    
+
     let eventTargetName = event.target.getAttribute('name');
 
     let tempObj = {};
@@ -93,7 +93,7 @@ class App extends Component {
   }
 
   clickHandler() {
-    
+
     this.setState({
       imageClicked: parseInt(event.target.id),
       showingModal: 'ModalViewPhotos'
@@ -122,7 +122,7 @@ class App extends Component {
   }
 
   render() {
-    
+
     return (
       <div data-test="main-app">
 
@@ -211,11 +211,12 @@ class App extends Component {
 
           <Badge
             // Share Badge 
-            data-test="modal-share"
+            data-test="badge-share"
             passData={{
-              text: 'Share',
+              classAdd: 'ShareBadge',
               posRight: 120,
               posTop: 20,
+              text: 'Share',
               imgSrc: 'export.png',
               modalName: 'ModalShare'
             }}
@@ -225,9 +226,10 @@ class App extends Component {
           <Badge
             // Save Badge
             passData={{
-              text: "Save",
+              classAdd: 'SaveBadge',
               posRight: 20,
               posTop: 20,
+              text: "Save",
               imgSrc: 'heart.png',
               modalName: 'ModalSave'
             }}
@@ -236,11 +238,11 @@ class App extends Component {
 
           <Badge
             // View Photos Badge 
-
             passData={{
-              text: "View Photos",
+              classAdd: 'PhotoBadge',
               posRight: 20,
               posTop: 240,
+              text: "View Photos",
               modalName: 'ModalViewPhotos'
             }}
             clickHandle={this.modalActivate}

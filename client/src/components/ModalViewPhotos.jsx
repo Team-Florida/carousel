@@ -2,8 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components';
 import ImageMovement from './ImageMovement.jsx';
+import CloseButton from './CloseButton.jsx';
 
-const ShareModalBox = styled.div`
+const ImageModalBox = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
@@ -13,22 +14,21 @@ const ShareModalBox = styled.div`
   position: relative;
 `;
 
-const CrossButton = styled.div`
-  float: right;
-  margin: 36px;
-  height: 36px;
-  width: 36px;
-  background-image: url("./Images/badge-images/close.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+const CloseButtonContainer = styled.div`
+  position: absolute;
+  right: 24px;
+  top: 24px;
 `;
 
 const ModalViewPhotos = props => {
+  
   return (
-    <ShareModalBox>
-      <CrossButton onClick={props.closeHandle}></CrossButton>
+    <ImageModalBox>
+      <CloseButtonContainer>
+        <CloseButton closeHandle={props.closeHandle} buttonSize="24"></CloseButton>
+      </CloseButtonContainer>
       <ImageMovement album={props.modalData} imageClicked={props.imageClicked}></ImageMovement>
-    </ShareModalBox>
+    </ImageModalBox>
   );
 }
 

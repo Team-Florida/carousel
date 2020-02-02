@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import modalCSS from '../../dist/modalStyles.module.css';
+import CloseButton from './CloseButton.jsx';
 
 import styled from 'styled-components';
 
@@ -14,17 +14,6 @@ const SaveModalBox = styled.div`
 const Head = styled.div`
   padding: 16px 24px;
   border-bottom: 1px solid #ebebeb;
-`;
-
-const CloseButton = styled.div`
-  float: left;
-  height: 24px;
-  width: 24px;
-  background-image: url("./Images/badge-images/close.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin-bottom: 24px;
-  cursor: pointer;
 `;
 
 const Heading = styled.div`
@@ -100,7 +89,9 @@ const ModalSave = props => {
   return (
     <SaveModalBox>
       <Head>
-        <CloseButton onClick={props.closeHandle}></CloseButton>
+
+        <CloseButton closeHandle={props.closeHandle} buttonSize="16"></CloseButton>
+
         <Heading>Sign up to book</Heading>
       </Head>
       <Body>
