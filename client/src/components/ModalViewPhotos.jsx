@@ -18,6 +18,7 @@ const CloseButtonContainer = styled.div`
   position: absolute;
   right: 24px;
   top: 24px;
+  z-index: 999;
 `;
 
 const ModalViewPhotos = props => {
