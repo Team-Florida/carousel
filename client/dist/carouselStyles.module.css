@@ -86,7 +86,7 @@ img {
   transform: scale(1.05);
 }
 
-
+ 
 /* =============== Badge  =============== */
 
 .badge {
@@ -99,12 +99,19 @@ img {
   position: absolute;
   z-index: 10;
   right: 20px;
+  text-align: left;
   font-size: 14px;
   color: #484848;
   background-color: #ffffff;
   border-radius: 5px;
   cursor: pointer;
 }
+
+.ShareBadge {
+  posRight: 60;
+  posTop: 20;
+}
+
 
 /* =============== Media Rule 744px-1127px  =============== */
 
@@ -138,6 +145,19 @@ img {
   }
   
   .RightBox {
+    display: none;
+  }
+
+  .PhotoBadge {
+    display: none;
+  }
+
+  .badge {
+    background: none;
+    background-color: none;
+  }
+
+  .BadgeText {
     display: none;
   }
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import movementCss from '../../dist/movementStyles.module.css';
+import CloseButton from './CloseButton.jsx';
 
-
-const imagesCollection = ['./Images/1.jpg', './Images/2.jpg', './Images/3.jpg', './Images/4.jpg', './Images/5.jpg', './Images/6.jpg', './Images/7.jpg', './Images/8.jpg', './Images/9.jpg', './Images/10.jpg', './Images/11.jpg']
 
 class ImageMovement extends React.Component {
 
@@ -10,17 +9,47 @@ class ImageMovement extends React.Component {
     super(props);
 
     this.state = {
-      data: imagesCollection,
+      data: this.props.album,
       currentPosition: 0,
       translatePosition: 0,
-      sliderWindowLeft: 36
+      fixedPositions: 1
     }
 
     this.imageBackHandler = this.imageBackHandler.bind(this);
     this.imageFowardHandler = this.imageFowardHandler.bind(this);
     this.thumbnailClickHandler = this.thumbnailClickHandler.bind(this);
     this.sliderHelper = this.sliderHelper.bind(this);
+    this.handleResize = this.handleResize.bind(this);
   }
+
+  
+
+  componentDidMount() {
+    if (window.innerWidth <= 1127) {
+      this.setState({
+        fixedPositions: 3
+      })
+    }
+    window.addEventListener("resize", this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  }
+
+  handleResize() {
+    let newFixedPosition = 1;
+    if (window.innerWidth <= 1127) {
+      newFixedPosition = 3;
+    }
+    this.setState({
+      fixedPositions: newFixedPosition
+    }
+    ,() => this.sliderHelper(this.state.currentPosition)
+    )
+  }
+
+
 
   // Handles event when back button is clicked
   imageBackHandler() {
@@ -32,21 +61,8 @@ class ImageMovement extends React.Component {
       newPosition = this.state.data.length - 1
     }
 
-    // TranslatePosition - Movement of slider
-    let newTranslatePosition;
-
-    if (newPosition === this.state.data.length - 1) {
-      // When reached the beginning and back button is pressed
-      newTranslatePosition = -(this.state.data.length - 3)
-    } else if (newPosition === 0 || newPosition === this.state.data.length - 2) {
-      // For first and last position don't move slider, move the slider window
-      newTranslatePosition = this.state.translatePosition;
-    } else {
-      newTranslatePosition = this.state.translatePosition + 1;
-    }
-
     // Helper function to adjust slider window and setState of all values
-    this.sliderHelper(newPosition, newTranslatePosition);
+    this.sliderHelper(newPosition);
 
   }
 
@@ -60,83 +76,38 @@ class ImageMovement extends React.Component {
       newPosition = 0
     }
 
-    // TranslatePosition - Movement of slider
-    let newTranslatePosition;
-    // For first and last position don't move slider, move the slider window
-    if (newPosition === 1 || newPosition === this.state.data.length - 1) {
-      newTranslatePosition = this.state.translatePosition;
-    } else {
-      newTranslatePosition = this.state.translatePosition - 1;
-    }
-
     // Helper function to adjust slider window and setState of all values
-    this.sliderHelper(newPosition, newTranslatePosition);
+    this.sliderHelper(newPosition);
 
   }
 
-  thumbnailClickHandler(event)  {
+  thumbnailClickHandler(event) {
     let newPosition = parseInt(event.target.id);
-    let currentPosition = this.state.currentPosition;
-    let totalMovement = newPosition - currentPosition;
 
-    
-     // TranslatePosition - Movement of slider
-     let newTranslatePosition = this.state.translatePosition - totalMovement;
-     
-    // Foward Movement
-    if(totalMovement > 0) {
-      // For first and last position don't move slider, move the slider window
-      if (currentPosition === 0 || newPosition === this.state.data.length - 1) {
-        newTranslatePosition = newTranslatePosition + 1;
-      } 
-    }
- 
-    // Back movement
-    if(totalMovement < 0) {
-      // For first and last position don't move slider, move the slider window
-      if (newPosition === 0 || currentPosition === this.state.data.length - 1) { 
-       newTranslatePosition = newTranslatePosition -1;
-     } 
-    }
-    
     // Helper function to adjust slider window and setState of all values
-    this.sliderHelper(newPosition, newTranslatePosition);
+    this.sliderHelper(newPosition);
   }
 
-  
-  // Helper function used in imageFowardHandler and imageBackHandler event Handler
-  sliderHelper(newPosition, newTranslatePosition) {
 
-    // Reached at end , so start from beginning
-    // -3 as for index starts from zero, 1st element and last element no change in translate Position 
-    if (newTranslatePosition < -(this.state.data.length - 3)) {
+  // Helper function used in imageFowardHandler and imageBackHandler event Handler
+  sliderHelper(newPosition) {
+
+    let newTranslatePosition = newPosition - this.state.fixedPositions;
+
+    if (newPosition < this.state.fixedPositions) {
       newTranslatePosition = 0;
     }
-
-    // Slider - Window 
-    let newSliderWindowLeft = this.state.sliderWindowLeft;
-
-    // Start Position for Slider (Only for first Image)
-    if (newPosition === 0) {
-      newSliderWindowLeft = 36;
-    }
-
-    // Default Position for Slider (All Images except first and second)
-    if (newPosition > 0) {
-      newSliderWindowLeft = 96;
-    }
-
-    // End Position for Slider (Only for Last Image)
-    if (newPosition === this.state.data.length - 1) {
-      newSliderWindowLeft = 156;
+   
+    if (newPosition > this.state.data.length - this.state.fixedPositions) {
+      newTranslatePosition = this.state.data.length - (this.state.fixedPositions * 2);
     }
 
     // New Values
     this.setState({
       currentPosition: newPosition,
-      translatePosition: newTranslatePosition,
-      sliderWindowLeft: newSliderWindowLeft
-    })
+      translatePosition: newTranslatePosition
+    });
+      
   }
 
   // Map over data array to make Images Element for slider 
@@ -146,12 +117,14 @@ class ImageMovement extends React.Component {
       let currentClass = ' ';
       if (index !== this.state.currentPosition) {
         currentClass = movementCss.LessOpaque;
+      } else {
+        currentClass  = movementCss.BorderFrame;
       }
 
       return (
         <div key={index} className={movementCss.ThumbnailImage}>
           <img
-            src={picPath}
+            src={picPath.path}
             id={index}
             className={currentClass}>
           </img>
@@ -162,7 +135,7 @@ class ImageMovement extends React.Component {
     return smallImagesElement;
   }
 
-
+ 
   render() {
 
     return (
@@ -171,17 +144,23 @@ class ImageMovement extends React.Component {
         <div className={movementCss.MainImageContainer}>
           <div className={movementCss.BackButton}>
             <button onClick={this.imageBackHandler} className={movementCss.btn}>
-              <img src="/Images/badge-images/less-than.png"></img>
+              <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
+                <path d="m13.7 16.29a1 1 0 1 1 -1.42 1.41l-8-8a1 1 0 0 1 0-1.41l8-8a1 1 0 1 1 1.42 1.41l-7.29 7.29z">
+                  </path>
+              </svg>
             </button>
           </div>
           <div className={movementCss.MainImageDiv}>
             <div className={movementCss.MainImageBox}>
-              <img src={this.state.data[this.state.currentPosition]}></img>
+              <img src={this.state.data[this.state.currentPosition].path}></img>
             </div>
           </div>
           <div className={movementCss.FowardButton}>
             <button onClick={this.imageFowardHandler}>
-              <img src="/Images/badge-images/greater-than.png"></img>
+            <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
+              <path d="m4.29 1.71a1 1 0 1 1 1.42-1.41l8 8a1 1 0 0 1 0 1.41l-8 8a1 1 0 1 1 -1.42-1.41l7.29-7.29z">
+              </path>
+            </svg>
             </button>
           </div>
         </div>
@@ -192,22 +171,17 @@ class ImageMovement extends React.Component {
           <div className={movementCss.SlideImageContainer}>
             <div
               className={movementCss.ImageSlider}
-              style={{ transform: `translate(${this.state.translatePosition * 60 + 30}px)` }}
+              style={{ transform: `translate(${this.state.translatePosition * -60 + 30}px)` }}
               onClick={this.thumbnailClickHandler}
             >
               {this.sliderImageElementMaker()}
             </div>
 
-            <div
-              className={movementCss.SliderWindow}
-              style={{ left: `${this.state.sliderWindowLeft}px` }}>
-            </div>
-
           </div>
 
-          <div>
+          <div className={movementCss.DescriptionBox}>
             <p>{this.state.currentPosition + 1}/{this.state.data.length} </p>
-            <p>Description here</p>
+            <p>{this.state.data[this.state.currentPosition].description}</p>
           </div>
 
         </div>

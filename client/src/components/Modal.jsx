@@ -30,10 +30,11 @@ class Modal extends React.Component {
 
   // When modal closes 
   modalCloseHandler() {
+   
     // Remove event listener so that Escape button press does nothing after modal close
     document.removeEventListener('keydown', this.keyDownHandler);
     // this is passed from App (Main)
-    this.props.quitHandle();
+    this.props.quitHandle(this.props.modalName);
   }
 
   // When clicked outside of modal box then close the modal
@@ -44,13 +45,24 @@ class Modal extends React.Component {
   }
 
   render() {
-
+ 
     const ModaltoRender = ModalIndex[this.props.modalName];
-
+ 
+    let modalDataToPass;
+    let imageClicked;
+    if(this.props.modalName === 'ModalViewPhotos') {
+      modalDataToPass = this.props.modalData;
+      imageClicked = this.props.imageClicked;
+    }
+    
     return (
       <div className={modalCSS.modalContainer} name="modalContainer">
         <div className={modalCSS.modalBox} name="modalBox" onClick={this.containerClickHandler}>
-          <ModaltoRender closeHandle={this.modalCloseHandler}></ModaltoRender>
+          <ModaltoRender 
+            closeHandle={this.modalCloseHandler} 
+            modalData={modalDataToPass}
+            imageClicked={imageClicked}
+          ></ModaltoRender>
         </div>
       </div>
     );

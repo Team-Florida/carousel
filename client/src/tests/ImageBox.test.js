@@ -9,7 +9,7 @@ import EnzymeAdapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
-import App from '../components/App.jsx';
+
 import ImageBox from '../components/ImageBox.jsx';
 
 const setup = (props={}, state=null) => {
@@ -24,9 +24,10 @@ const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
 }
 
-// const dummyFn = () => {
-//   console.log('this is dumb');
-// }
+
+const dummy = () => {
+  console.log('Hiiiiiiiiiiiiiiiiiiiiiiiii');
+}
 
 
 
@@ -36,10 +37,10 @@ test('renders without error', () => {
     passData: {
       divClass: appCss.LeftBox,
       imgSrc: data[0],
-      imgName: 'one',
+      imgName: 'two',
       imgClass: appCss["Inactive"],
-      mouseOverHandle: App.mouseOverHandler,
-      mouseOutHandle: App.mouseOutHandler
+      mouseOverHandle: dummy,
+      mouseOutHandle: dummy
     }
   }, null);
 
@@ -55,15 +56,25 @@ test('mouseover check' , () => {
       imgSrc: data[0],
       imgName: 'one',
       imgClass: appCss["Inactive"],
-      mouseOverHandle: App.mouseOverHandler,
-      mouseOutHandle: App.mouseOutHandler
+      mouseOverHandle: dummy,
+      mouseOutHandle: dummy
     }
   }, null);
 
-  const appComponent = wrapper.find('img');
+  // const instance = wrapper.instance();
+
+  const appComponent = findByTestAttr(wrapper, 'main-image-box');
+
+  //   var stateVal = wrapper.state('count');
+  //   console.log("First ", stateVal)
   
-  // const FakeFun = jest.spyOn(ImageBox.prototype, "dummyFn");
-  // appComponent.simulate('mouseover');
-  // expect(FakeFun).toHaveBeenCalled();
+    appComponent.simulate('mouseover');
+
+    dummy.toHaveBeenCalled();
+
+  // const appComponent = wrapper.find('img');
+
+  
+
 
 });

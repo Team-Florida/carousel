@@ -6,7 +6,7 @@ class ImageBox extends React.Component {
     super(props)
   }
 
- 
+
 
   render() {
     return (
@@ -14,9 +14,11 @@ class ImageBox extends React.Component {
         <img
           src={this.props.passData.imgSrc}
           name={this.props.passData.imgName}
+          id={this.props.passData.imgId}
           className={this.props.passData.imgClass}
           onMouseOver={this.props.passData.mouseOverHandle}
           onMouseOut={this.props.passData.mouseOutHandle}
+          onClick={this.props.passData.clickHandle}
         ></img>
       </div>
     );
