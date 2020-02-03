@@ -1,6 +1,7 @@
 import React from 'react';
-import movementCss from '../../dist/movementStyles.module.css';
-import CloseButton from './CloseButton.jsx';
+// import movementCss from '../../dist/movementStyles.module.css';
+import movementCss from '../styles/movementStyles.module.css';
+// import CloseButton from './CloseButton.jsx';
 
 
 class ImageMovement extends React.Component {
@@ -24,6 +25,13 @@ class ImageMovement extends React.Component {
 
 
   componentDidMount() {
+    this.setState(
+      {
+        currentPosition: this.props.imageClicked-1
+      }
+      , () => this.sliderHelper(this.state.currentPosition)
+      );
+
     if (window.innerWidth <= 1127) {
       this.setState({
         fixedPositions: 3
@@ -111,7 +119,7 @@ class ImageMovement extends React.Component {
 
   // Map over data array to make Images Element for slider 
   sliderImageElementMaker() {
-
+    
     const smallImagesElement = this.state.data.map((picPath, index) => {
       let currentClass = ' ';
       if (index !== this.state.currentPosition) {

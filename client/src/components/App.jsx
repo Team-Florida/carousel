@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import appCss from '../../dist/carouselStyles.module.css';
+// import appCss from '../../dist/carouselStyles.module.css';
+import appCss from '../styles/carouselStyles.module.css';
 import ImageBox from './ImageBox.jsx';
 import Badge from './Badge.jsx';
 import Modal from './Modal.jsx';

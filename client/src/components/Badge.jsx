@@ -1,5 +1,6 @@
 import React from 'react';
-import appCss from '../../dist/carouselStyles.module.css';
+// import appCss from '../../dist/carouselStyles.module.css';
+import appCss from '../styles/carouselStyles.module.css';
 import HeartSvg from './HeartSvg.jsx';
 import UploadSvg from './UploadSvg.jsx';
 
@@ -39,14 +40,6 @@ class Badge extends React.Component {
         posRight: newPosRight
       })
     }
-  
-
-  // changePosition(position) {
-  //   this.setState({
-  //       posRight: position,
-  //       posTop: 20
-  //   });
-  // }
   
   render() {
     return (

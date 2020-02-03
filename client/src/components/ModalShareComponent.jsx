@@ -22,7 +22,6 @@ const PlatformIcon = styled.div`
   float: left;
   height: 18px;
   width: 18px;
-  background-image: url("./Images/badge-images/close.png");
   background-size: cover;
   background-repeat: no-repeat;
   margin-right: 8px;
@@ -44,7 +43,7 @@ const ModalShareComponent = props => {
   return (
     <PlatformBox>
       <InnerBox>
-        <PlatformIcon style={{ backgroundImage: `url(./Images/badge-images/social/${props.platform.icon_url})` }}></PlatformIcon>
+        <PlatformIcon style={{ backgroundImage: `url(./images/social/${props.platform.icon_url})` }}></PlatformIcon>
         <PlatformName>{props.platform.name}</PlatformName>
       </InnerBox>
     </PlatformBox>

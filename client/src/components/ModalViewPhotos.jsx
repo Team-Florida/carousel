@@ -22,7 +22,6 @@ const CloseButtonContainer = styled.div`
 `;
 
 const ModalViewPhotos = props => {
-  
   return (
     <ImageModalBox>
       <CloseButtonContainer>
