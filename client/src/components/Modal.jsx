@@ -1,5 +1,6 @@
 import React from 'react';
-import modalCSS from '../../dist/modalStyles.module.css';
+// import modalCSS from '../../dist/modalStyles.module.css';
+import modalCSS from '../styles/modalStyles.module.css';
 
 import ModalIndex from './ModalIndex.jsx';
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import movementCss from '../../dist/movementStyles.module.css';
-import CloseButton from './CloseButton.jsx';
+// import movementCss from '../../dist/movementStyles.module.css';
+import movementCss from '../styles/movementStyles.module.css';
+// import CloseButton from './CloseButton.jsx';
 
 
 class ImageMovement extends React.Component {
@@ -22,9 +23,15 @@ class ImageMovement extends React.Component {
     this.handleResize = this.handleResize.bind(this);
   }
 
-  
 
   componentDidMount() {
+    this.setState(
+      {
+        currentPosition: this.props.imageClicked-1
+      }
+      , () => this.sliderHelper(this.state.currentPosition)
+      );
+
     if (window.innerWidth <= 1127) {
       this.setState({
         fixedPositions: 3
@@ -89,7 +96,7 @@ class ImageMovement extends React.Component {
   }
 
 
-  // Helper function used in imageFowardHandler and imageBackHandler event Handler
+  // Helper function used in imageFowardHandler and imageBackHandler event-handler
   sliderHelper(newPosition) {
 
     let newTranslatePosition = newPosition - this.state.fixedPositions;
@@ -112,7 +119,7 @@ class ImageMovement extends React.Component {
 
   // Map over data array to make Images Element for slider 
   sliderImageElementMaker() {
-
+    
     const smallImagesElement = this.state.data.map((picPath, index) => {
       let currentClass = ' ';
       if (index !== this.state.currentPosition) {
@@ -142,27 +149,30 @@ class ImageMovement extends React.Component {
       <div>
         {/* Main Image Container */}
         <div className={movementCss.MainImageContainer}>
-          <div className={movementCss.BackButton}>
+
+          <div className={movementCss.MainImageBox}>
+            <img src={this.state.data[this.state.currentPosition].path}></img>
+          </div>
+          
+          <span className={movementCss.BackButton}>
             <button onClick={this.imageBackHandler} className={movementCss.btn}>
               <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
                 <path d="m13.7 16.29a1 1 0 1 1 -1.42 1.41l-8-8a1 1 0 0 1 0-1.41l8-8a1 1 0 1 1 1.42 1.41l-7.29 7.29z">
                   </path>
               </svg>
             </button>
-          </div>
-          <div className={movementCss.MainImageDiv}>
-            <div className={movementCss.MainImageBox}>
-              <img src={this.state.data[this.state.currentPosition].path}></img>
-            </div>
-          </div>
-          <div className={movementCss.FowardButton}>
+          </span>
+
+          <span className={movementCss.FowardButton}>
             <button onClick={this.imageFowardHandler}>
             <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
               <path d="m4.29 1.71a1 1 0 1 1 1.42-1.41l8 8a1 1 0 0 1 0 1.41l-8 8a1 1 0 1 1 -1.42-1.41l7.29-7.29z">
               </path>
             </svg>
             </button>
-          </div>
+          </span>
+          
+          
         </div>
 
         {/* Image Slider Container */}

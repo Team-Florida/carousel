@@ -1,24 +1,21 @@
 /* =============== Main Image =============== */
 
 .MainImageContainer {
-  float: left;
-  width: 76%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px; 
-  /* border: 10px solid #000000; */
+  width: 100%;
+  margin-bottom: 0px;
+  height: 100vh;
+  display: table-cell;
+  padding: 40px;
+  vertical-align: middle;
+  position: relative;
+  /* border: 1px solid #000000; */
 }
 
-.MainImageDiv {
-  width: 92%;
-  text-align: center;
-}
+
  
 .MainImageBox {
   width: 100vh;
-  height: 55vh;
- 
+  height: 75vh;
   margin: 0 auto;
 }
 
@@ -27,31 +24,45 @@
 }
 
 .BackButton {
-  width: 4%;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  /* border: 1px solid #000000; */
 }
 
 .FowardButton {
-  width: 4%;
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  /* border: 1px solid #000000; */
 }
 
 
 .FowardButton button, .BackButton button {
   border: 0;
   cursor: pointer;
+  background: none;
+  z-index: 999;
 }
 
 .FowardButton button:focus, .BackButton button:focus {
   outline:0;
 }
 
+.FowardButton button svg, .BackButton button svg {
+  height: 24px; 
+  width: 24px; 
+  fill: #484848;
+}
+
 /* =============== Slider Images  =============== */
 
 .AsideContainer {
-  float: right;
+  padding-top: 104px;
+  display: table-cell;
+  vertical-align: top;
   width: 264px;
-  /* height: 400px; */
-  text-align: center;
-  /* border: 10px solid #000000; */
+  min-width: 264px;
 }
 
 /* =============== Slider Container  =============== */
@@ -59,8 +70,8 @@
   width: 212px;
   height: 48px;
   margin-top: 40px;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
   /* border: 1px solid green; */
 }
 
@@ -69,7 +80,9 @@
   display: flex;
   width: 60px;
   height: 48px;
-  transition: -ms-transform 0.3s ease-out 0s, -webkit-transform 0.3s ease-out 0s, transform 0.3s ease-out 0s !important;
+  transition: -ms-transform 0.3s ease-out 0s,
+              -webkit-transform 0.3s ease-out 0s, 
+              transform 0.3s ease-out 0s;
 }
 
 .ImageSlider img {
@@ -90,19 +103,6 @@
   padding: 0px 6px;
 }
 
-/* ================== Image Slider Window  =================== */
-/* = (div with border which shows current highlighted image) = */
- 
-/* .SliderWindow {
-  height: 48px;
-  width: 48px;
-  position: absolute;
-  top: 0px;
-  overflow: hidden;
-  border: 2px solid #484848;
-  border-radius: 4px;
-} */
-
 .LessOpaque {
   opacity: 0.5;
 }
@@ -119,27 +119,65 @@
   font-weight: 400;
 }
 
-button svg {
-  height: 24px; 
-  width: 24px; 
-  fill: rgb(72, 72, 72);
-}
+
 
 
 @media only screen and (max-width: 1127px) {
 
   .MainImageContainer {
-    width: 100%;
+    height: 65vh;
+    width: 100vw;
+  }
+
+  .MainImageBox {
+    width: 85vh;
+    height: 55vh;
   }
 
   .AsideContainer {
     width: 100%;
+    padding-top: 10px;
     text-align: center;
+    display: block;
   }
 
   .SlideImageContainer {
     margin: 20px auto;
     width: 412px;
+  }
+}
+
+@media only screen and (max-width: 743px) {
+
+  .MainImageContainer {
+    display: table;
+    width: 100%;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .MainImageBox {
+    /* width: auto;
+    height: auto; */
+    width: 70%;
+    height: auto;
+  }
+
+  .AsideContainer {
+    display: none;
+  }
+
+  .BackButton {
+    left: 3%;
+  }
+
+  .FowardButton {
+    right: 3%;
+  }
+
+  .FowardButton button svg, .BackButton button svg {
+    /* fill: #ffffff; */
   }
 }
 

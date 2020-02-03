@@ -7,7 +7,7 @@ import EnzymeAdapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 import App from '../components/App.jsx';
-import appCss from '../../dist/carouselStyles.module.css';
+// import appCss from '../../dist/carouselStyles.module.css';
 
 const setup = (props = {}, state = null) => {
   const wrapper = shallow(<App {...props} />);

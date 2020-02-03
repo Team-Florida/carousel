@@ -55,7 +55,7 @@ const ContinueButton = styled.div`
   margin-bottom: 16px;
   color: ${props => props.textColor};
   background-color: ${props => props.backgroundColor};
-  background-image: url("./Images/badge-images/social/${props => props.backgroundImage}");
+  background-image: url("./images/social/${props => props.backgroundImage}");
   background-size: 25px 25px;
   background-position: 12px 10px; 
   background-repeat: no-repeat;
@@ -106,7 +106,7 @@ const ModalSave = props => {
         <ContinueButton backgroundColor="#ffffff" backgroundImage="facebook.png" textColor="#484848" borderColor="#b0b0b0" borderHoverColor="#222222" >
           Continue with Facebook
         </ContinueButton>
-        <ContinueButton backgroundColor="#ffffff" backgroundImage="facebook.png" textColor="#484848" borderColor="#b0b0b0" borderHoverColor="#222222" >
+        <ContinueButton backgroundColor="#ffffff" backgroundImage="google.png" textColor="#484848" borderColor="#b0b0b0" borderHoverColor="#222222" >
           Continue with Google
         </ContinueButton>
         <Footer>
