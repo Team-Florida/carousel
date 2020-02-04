@@ -1,15 +1,22 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const model = require('../model/index.js');
 
 const app = express();
-const PORT = 3000;
+const PORT = 2500;
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+}
+app.use(cors(corsOptions));
 
 const clientPath = path.join(__dirname, '../client/dist');
 app.use(express.static(clientPath));
