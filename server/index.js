@@ -34,7 +34,7 @@ app.get('/properties',  (req, res) => {
 
 app.get('/property:id',  (req, res) => {
   let propertyId = req.params.id;
-  propertyId = propertyId.slice(1); // reoove starting :
+  propertyId = propertyId.slice(1); // remove starting :
   
   model.fetchProperty(propertyId)
     .then(response => res.send(response));

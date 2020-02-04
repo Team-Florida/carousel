@@ -34,19 +34,37 @@ class App extends Component {
   }
 
 
+  // componentDidMount() {
+  //   console.log('Here');
+  //   console.log(window.location.href)
+  //   var comp = this;
+  //   let property_id = Math.floor(Math.random() * 100);
+
+  //   Axios.get(`http://localhost:2500/property:${property_id}`)
+  //     .then(response => {
+  //       this.setState({
+  //         data: response.data[0]
+  //       }
+  //         // , () => console.log(this.state.data)
+  //       )
+  //     })
+  //     .catch((error) => console.log("Error fetching initial Data on componentDidMount"));
+  // }
+
   componentDidMount() {
-    var comp = this;
-    let property_id = Math.floor(Math.random() * 100);
+ 
+    var url = new URL(window.location.href);
+    var property_id = url.searchParams.get("house");
 
     Axios.get(`http://localhost:2500/property:${property_id}`)
       .then(response => {
-        comp.setState({
+        this.setState({
           data: response.data[0]
         }
-          // , () => console.log(this.state.data)
-        )
-      })
-      .catch((error) => console.log("Error fetching initial Data on componentDidMount"));
+        // , () => console.log(this.state.data)
+      )
+    })
+    .catch((error) => console.log("Error fetching initial Data on componentDidMount"));
   }
 
 
