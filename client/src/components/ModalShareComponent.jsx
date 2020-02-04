@@ -43,7 +43,7 @@ const ModalShareComponent = props => {
   return (
     <PlatformBox>
       <InnerBox>
-        <PlatformIcon style={{ backgroundImage: `url(./images/social/${props.platform.icon_url})` }}></PlatformIcon>
+        <PlatformIcon style={{ backgroundImage: `url('https://hrcarousel.s3-us-west-1.amazonaws.com/social/${props.platform.icon_url}')` }}></PlatformIcon>
         <PlatformName>{props.platform.name}</PlatformName>
       </InnerBox>
     </PlatformBox>

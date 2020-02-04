@@ -55,7 +55,7 @@ const ContinueButton = styled.div`
   margin-bottom: 16px;
   color: ${props => props.textColor};
   background-color: ${props => props.backgroundColor};
-  background-image: url("./images/social/${props => props.backgroundImage}");
+  background-image: url("https://hrcarousel.s3-us-west-1.amazonaws.com/social/${props => props.backgroundImage}");
   background-size: 25px 25px;
   background-position: 12px 10px; 
   background-repeat: no-repeat;

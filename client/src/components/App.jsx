@@ -38,7 +38,7 @@ class App extends Component {
     var comp = this;
     let property_id = Math.floor(Math.random() * 100);
 
-    Axios.get(`/property:${property_id}`)
+    Axios.get(`http://localhost:2500/property:${property_id}`)
       .then(response => {
         comp.setState({
           data: response.data[0]
