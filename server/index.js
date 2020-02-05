@@ -16,11 +16,16 @@ var corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
 }
+
 app.use(cors(corsOptions));
 
 const clientPath = path.join(__dirname, '../client/dist');
 app.use(express.static(clientPath));
 
+// Insert Dummy Data
+const dummyData = require('../database/dummyDataInsert.js');
+dummyData.dummyData();
+ 
 // For testing only
 app.get('/hello', (req, res) => {
   res.send('Hello from server');

@@ -32,25 +32,7 @@ class App extends Component {
     this.modalActivate = this.modalActivate.bind(this);
     this.modalQuitHandler = this.modalQuitHandler.bind(this);
   }
-
-
-  // componentDidMount() {
-  //   console.log('Here');
-  //   console.log(window.location.href)
-  //   var comp = this;
-  //   let property_id = Math.floor(Math.random() * 100);
-
-  //   Axios.get(`http://localhost:2500/property:${property_id}`)
-  //     .then(response => {
-  //       this.setState({
-  //         data: response.data[0]
-  //       }
-  //         // , () => console.log(this.state.data)
-  //       )
-  //     })
-  //     .catch((error) => console.log("Error fetching initial Data on componentDidMount"));
-  // }
-
+ 
   componentDidMount() {
  
     var url = new URL(window.location.href);

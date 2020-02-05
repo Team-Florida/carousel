@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/carouseldb', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://database/carouseldb', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const database = mongoose.connection;
 
