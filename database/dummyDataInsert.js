@@ -1,5 +1,5 @@
 const CarouseModel = require('./index.js');
-const makeFakeData = require('./fakeData.js');
+// const makeFakeData = require('./fakeData.js');
 
 
 
@@ -13,6 +13,10 @@ const makeFakeData = require('./fakeData.js');
 // MyData 
 const myData = require('./myData.js');
 
-CarouseModel.insertMany(myData)
-  .then(response => console.log(`${response.length} records inserted`))
-  .catch(error => console.log(error));
+module.exports.dummyData = () => {
+
+  CarouseModel.remove({})
+    .then(() => CarouseModel.insertMany(myData))
+    .then(response => console.log(`${response.length} records inserted`))
+    .catch(error => console.log(error));
+};
